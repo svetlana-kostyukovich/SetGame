@@ -21,17 +21,7 @@ struct Set {
         if checkShape(), checkNumber(), checkShading(), checkColor() {
             return true
         }
-        let e = [1,2,3]
-        let g = e[10..<10]
-        print("\(g)")
         return false
-        
-        var a = "abcde"
-        let c = 4
-        let d = 4
-        //let b = a[c..<d]
-        
-
     }
     
     mutating func chooseCard(at index: Int) {
