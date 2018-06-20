@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../SetGame/Grid.swift">
+   </FileRef>
+   <FileRef
       location = "self:SetGame.xcodeproj">
    </FileRef>
 </Workspace>

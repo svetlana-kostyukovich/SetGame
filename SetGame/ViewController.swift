@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var dealMoreButton: UIButton!
+    
+    @IBOutlet weak var newGameButton: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
