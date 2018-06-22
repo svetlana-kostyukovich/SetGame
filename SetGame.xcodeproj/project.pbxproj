@@ -17,6 +17,7 @@
 		C47ABA5D20D97F0B0010F932 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47ABA5C20D97F0B0010F932 /* SetGame.swift */; };
 		C47ABA5F20D99BA40010F932 /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47ABA5E20D99BA40010F932 /* SetGameView.swift */; };
 		C47ABA6320DAFEFE0010F932 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47ABA6220DAFEFE0010F932 /* Grid.swift */; };
+		C47ABA6520DC29670010F932 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47ABA6420DC29670010F932 /* PlayingCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C47ABA5C20D97F0B0010F932 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		C47ABA5E20D99BA40010F932 /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
 		C47ABA6220DAFEFE0010F932 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		C47ABA6420DC29670010F932 /* PlayingCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				C47ABA6220DAFEFE0010F932 /* Grid.swift */,
 				C47ABA4620D97E1A0010F932 /* AppDelegate.swift */,
 				C47ABA4820D97E1A0010F932 /* ViewController.swift */,
+				C47ABA6420DC29670010F932 /* PlayingCardView.swift */,
 				C47ABA5820D97E900010F932 /* PlayingCard.swift */,
 				C47ABA5A20D97ECD0010F932 /* PlayingCardDeck.swift */,
 				C47ABA5C20D97F0B0010F932 /* SetGame.swift */,
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C47ABA4920D97E1A0010F932 /* ViewController.swift in Sources */,
+				C47ABA6520DC29670010F932 /* PlayingCardView.swift in Sources */,
 				C47ABA5B20D97ECD0010F932 /* PlayingCardDeck.swift in Sources */,
 				C47ABA5D20D97F0B0010F932 /* SetGame.swift in Sources */,
 				C47ABA5920D97E900010F932 /* PlayingCard.swift in Sources */,

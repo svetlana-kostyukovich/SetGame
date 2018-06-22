@@ -11,7 +11,7 @@ import Foundation
 struct Set {
     var deck = PlayingCardDeck()
     //deck = [PlayingCard]
-    var drawn = [PlayingCard]()
+    var dealedCards = [PlayingCard]()
     var potentialSetIndex = [Int]()
     
     // init??
@@ -27,65 +27,66 @@ struct Set {
     mutating func chooseCard(at index: Int) {
         if potentialSetIndex.count < 3 {
             potentialSetIndex.append(index)
+            dealedCards[index].isSelected = true
         } else {
             if checkSet() {
                 for indeces in potentialSetIndex {
-                    drawn[indeces].isSelected = false
-                    drawn[indeces].isMatched = true
+                    dealedCards[indeces].isSelected = false
+                    dealedCards[indeces].isMatched = true
                 }
             } else {
                 for indeces in potentialSetIndex {
-                    drawn[indeces].isSelected = false
-                    drawn[indeces].isMatched = false
+                    dealedCards[indeces].isSelected = false
+                    dealedCards[indeces].isMatched = false
                 }
             }
             potentialSetIndex.removeAll(keepingCapacity: true)
         }
     }
     
-    mutating func draw() {
-        if let card = deck.select() {
-            drawn.append(card)
+    mutating func dealOneMore() {
+        if let card = deck.dealOneMore() {
+            dealedCards.append(card)
         }
     }
     
     private func checkShape() -> Bool {
-        if drawn[potentialSetIndex[0]].shape == drawn[potentialSetIndex[1]].shape
-            && drawn[potentialSetIndex[0]].shape == drawn[potentialSetIndex[2]].shape
-            || drawn[potentialSetIndex[0]].shape != drawn[potentialSetIndex[1]].shape
-            && drawn[potentialSetIndex[0]].shape != drawn[potentialSetIndex[2]].shape
-            && drawn[potentialSetIndex[1]].shape != drawn[potentialSetIndex[2]].shape {
+        if dealedCards[potentialSetIndex[0]].shape == dealedCards[potentialSetIndex[1]].shape
+            && dealedCards[potentialSetIndex[0]].shape == dealedCards[potentialSetIndex[2]].shape
+            || dealedCards[potentialSetIndex[0]].shape != dealedCards[potentialSetIndex[1]].shape
+            && dealedCards[potentialSetIndex[0]].shape != dealedCards[potentialSetIndex[2]].shape
+            && dealedCards[potentialSetIndex[1]].shape != dealedCards[potentialSetIndex[2]].shape {
             return true }
         return false
         
     }
     
     private func checkNumber() -> Bool {
-        if drawn[potentialSetIndex[0]].number == drawn[potentialSetIndex[1]].number
-            && drawn[potentialSetIndex[0]].number == drawn[potentialSetIndex[2]].number
-            || drawn[potentialSetIndex[0]].number != drawn[potentialSetIndex[1]].number
-            && drawn[potentialSetIndex[0]].number != drawn[potentialSetIndex[2]].number
-            && drawn[potentialSetIndex[1]].number != drawn[potentialSetIndex[2]].number {
+        if dealedCards[potentialSetIndex[0]].number == dealedCards[potentialSetIndex[1]].number
+            && dealedCards[potentialSetIndex[0]].number == dealedCards[potentialSetIndex[2]].number
+            || dealedCards[potentialSetIndex[0]].number != dealedCards[potentialSetIndex[1]].number
+            && dealedCards[potentialSetIndex[0]].number != dealedCards[potentialSetIndex[2]].number
+            && dealedCards[potentialSetIndex[1]].number != dealedCards[potentialSetIndex[2]].number {
             return true}
         return false
     }
     
     private func checkShading() -> Bool {
-        if drawn[potentialSetIndex[0]].shading == drawn[potentialSetIndex[1]].shading
-            && drawn[potentialSetIndex[0]].shading == drawn[potentialSetIndex[2]].shading
-            || drawn[potentialSetIndex[0]].shading != drawn[potentialSetIndex[1]].shading
-            && drawn[potentialSetIndex[0]].shading != drawn[potentialSetIndex[2]].shading
-            && drawn[potentialSetIndex[1]].shading != drawn[potentialSetIndex[2]].shading {
+        if dealedCards[potentialSetIndex[0]].shading == dealedCards[potentialSetIndex[1]].shading
+            && dealedCards[potentialSetIndex[0]].shading == dealedCards[potentialSetIndex[2]].shading
+            || dealedCards[potentialSetIndex[0]].shading != dealedCards[potentialSetIndex[1]].shading
+            && dealedCards[potentialSetIndex[0]].shading != dealedCards[potentialSetIndex[2]].shading
+            && dealedCards[potentialSetIndex[1]].shading != dealedCards[potentialSetIndex[2]].shading {
             return true}
         return false
     }
     
     private func checkColor() -> Bool{
-        if drawn[potentialSetIndex[0]].color == drawn[potentialSetIndex[1]].color
-            && drawn[potentialSetIndex[0]].color == drawn[potentialSetIndex[2]].color
-            || drawn[potentialSetIndex[0]].color != drawn[potentialSetIndex[1]].color
-            && drawn[potentialSetIndex[0]].color != drawn[potentialSetIndex[2]].color
-            && drawn[potentialSetIndex[1]].color != drawn[potentialSetIndex[2]].color {
+        if dealedCards[potentialSetIndex[0]].color == dealedCards[potentialSetIndex[1]].color
+            && dealedCards[potentialSetIndex[0]].color == dealedCards[potentialSetIndex[2]].color
+            || dealedCards[potentialSetIndex[0]].color != dealedCards[potentialSetIndex[1]].color
+            && dealedCards[potentialSetIndex[0]].color != dealedCards[potentialSetIndex[2]].color
+            && dealedCards[potentialSetIndex[1]].color != dealedCards[potentialSetIndex[2]].color {
             return true
         }
         return false

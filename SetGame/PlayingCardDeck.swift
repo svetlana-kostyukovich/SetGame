@@ -24,7 +24,7 @@ struct PlayingCardDeck {
         // randomize
     }
     
-    mutating func select() -> PlayingCard? {
+    mutating func dealOneMore() -> PlayingCard? {
         if deck.count > 0 {
             return deck.remove(at: deck.count.arc4random)
         } else {
