@@ -10,28 +10,36 @@ import UIKit
 
 class SetGameView: UIView {
 
-    private let columns = 3
-    private let rows = 2
     
-    private lazy var grid = Grid(layout: .dimensions(rowCount: rows, columnCount: columns))
-    var drawnCards = [PlayingCardView]()
-    
-    override func draw(_ rect: CGRect) {
-        
-        
-        
-        
-        // Drawing code
-        
-        //grid
-        //[subView]:PlayingCardView
-        
+    var drawnCards = [PlayingCardView](){
+        willSet {
+            removeAll()
+        }
+        didSet {
+            addDrawnCards()
+            setNeedsLayout()
+        }
     }
     
-    func createDrawnCards() {
-        for row in 0..<rows {
-            for column in 0..<columns {
-                drawnCards[row, column] = newCard
+    private func removeAll() {
+        for card in drawnCards {
+            card.removeFromSuperview()
+        }
+    }
+
+    private func addDrawnCards() {
+        for card in drawnCards {
+            addSubview(card)
+        }
+    }
+    
+    override func layoutSubviews() {
+        var grid = Grid(layout: .aspectRatio(0.62), frame: bounds)
+        grid.cellCount = drawnCards.count
+        for index in 0..<grid.cellCount {
+            if let frame = grid[index] {
+                let gap = frame.width*0.05
+                drawnCards[index].frame = CGRect(origin: frame.origin, size: CGSize(width: frame.width - gap, height: frame.height - gap))
             }
         }
     }
