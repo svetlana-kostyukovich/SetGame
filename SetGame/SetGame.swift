@@ -9,10 +9,11 @@
 import Foundation
 
 struct Set {
-    var deck = PlayingCardDeck()
+    private var deck = PlayingCardDeck()
     //deck = [PlayingCard]
     var dealedCards = [PlayingCard]()
     var potentialSetIndex = [Int]()
+    var deckIsEmpty = false
     
     // init??
     //potentialSetIndex.reserveCapacity(3)
@@ -22,6 +23,13 @@ struct Set {
             return true
         }
         return false
+    }
+    
+    mutating func setToDefault() {
+        deck = PlayingCardDeck()
+        potentialSetIndex.removeAll()
+        dealedCards.removeAll()
+        deckIsEmpty = false
     }
     
     mutating func chooseCard(at index: Int) {
@@ -44,11 +52,22 @@ struct Set {
         }
     }
     
+    mutating func shuffleCards() {
+        let middle: Int = dealedCards.count/2
+        for _ in 0..<middle {
+            let i = middle.arc4random
+            dealedCards.swapAt(i, dealedCards.count-i)
+        }
+    }
+    
     mutating func dealOneMore() {
         if let card = deck.dealOneMore() {
             dealedCards.append(card)
+        } else{
+            deckIsEmpty = true
         }
     }
+
     
     private func checkShape() -> Bool {
         if dealedCards[potentialSetIndex[0]].shape == dealedCards[potentialSetIndex[1]].shape
@@ -92,5 +111,3 @@ struct Set {
         return false
     }
 }
-
-
