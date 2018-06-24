@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var setGame = Set()
-
+    
     @IBOutlet weak var dealMoreButton: UIButton!
     
     @IBOutlet weak var newGameButton: UIButton!
@@ -19,29 +19,36 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var setGameView: SetGameView! {
         didSet{
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(shuffleCards))
-        swipe.direction = [.up,.down]
-        setGameView.addGestureRecognizer(swipe)
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(shuffleCards))
+            swipe.direction = [.up,.down]
+            setGameView.addGestureRecognizer(swipe)
         }
     }
     
     @IBAction func newGame(_ sender: UIButton) {
         setGame.setToDefault()
+        setGameView.drawnCards.removeAll()
         for _ in 1...12 {
             setGame.dealOneMore()
             updateViewFromModel()
         }
+        dealMoreButton.isHidden = false
+        dealMoreButton.isEnabled = true
     }
     
     
     @IBAction func dealThreeMore(_ sender: UIButton) {
         for _ in 1...3 {  // drawnCards + 3
-            if !setGame.deckIsEmpty {
-                setGame.dealOneMore()
-                updateViewFromModel()
-            } else {
+            setGame.dealOneMore()
+            if setGame.deckIsEmpty {
                 dealMoreButton.isEnabled = false
+                dealMoreButton.isHidden = true
+            } else {
+                dealMoreButton.isHidden = false
+                dealMoreButton.isEnabled = true
             }
+            updateViewFromModel()
+            
             //setGameView.drawnCards.append(PlayingCardView())
             //setGameView.subviews.last
             //setGameView.shape =
@@ -50,9 +57,11 @@ class ViewController: UIViewController {
     }
     
     func updateViewFromModel() {
+        print("dealed cards count = \(setGame.dealedCards.count)" )
+        setGameView.drawnCards.removeAll()
         for dealedCard in setGame.dealedCards {
             let playingCardView = PlayingCardView()
-            playingCardView.color = UIColor(named: dealedCard.color.rawValue)!
+            playingCardView.color = dealedCard.colorForView
             playingCardView.number = dealedCard.number.rawValue
             playingCardView.shape = dealedCard.shape.rawValue
             playingCardView.shading = dealedCard.shading.rawValue
@@ -64,12 +73,13 @@ class ViewController: UIViewController {
             if dealedCard.isMatched {
                 playingCardView.layer.borderColor = UIColor.green.cgColor
             } else if dealedCard.isSelected {
-                    playingCardView.layer.borderColor = UIColor.blue.cgColor
+                playingCardView.layer.borderColor = UIColor.green.cgColor
             } else {
-                playingCardView.layer.borderColor = UIColor.white.cgColor
+                playingCardView.layer.borderColor = UIColor.green.cgColor
             }
             
             setGameView.drawnCards.append(playingCardView)
+            print("append \(setGameView.drawnCards.count)")
         }
     }
     
@@ -88,19 +98,30 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        for _ in 1...12 {
-            setGame.dealOneMore()
-            updateViewFromModel()
-        }
+        //for _ in 1...12 {
+        //    setGame.dealOneMore()
+        //    updateViewFromModel()
+        // }
         // Do any additional setup after loading the view, typically from a nib.
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+}
 
-
+extension PlayingCard {
+    var colorForView: UIColor {
+        switch self.color.rawValue {
+        case "red": return UIColor.red
+        case "purple": return UIColor.purple
+        case "green": return UIColor.green
+        default: return UIColor.brown
+        }
+    }
 }
 

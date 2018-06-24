@@ -16,6 +16,7 @@ class SetGameView: UIView {
             removeAll()
         }
         didSet {
+            print("drawn cards count \(drawnCards.count)")
             addDrawnCards()
             setNeedsLayout()
         }
@@ -35,6 +36,7 @@ class SetGameView: UIView {
     
     override func layoutSubviews() {
         var grid = Grid(layout: .aspectRatio(0.62), frame: bounds)
+        print("\(drawnCards.count)")
         grid.cellCount = drawnCards.count
         for index in 0..<grid.cellCount {
             if let frame = grid[index] {

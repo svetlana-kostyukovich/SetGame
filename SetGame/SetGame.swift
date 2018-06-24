@@ -63,6 +63,7 @@ struct Set {
     mutating func dealOneMore() {
         if let card = deck.dealOneMore() {
             dealedCards.append(card)
+            print("\(card)")
         } else{
             deckIsEmpty = true
         }
