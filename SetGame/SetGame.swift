@@ -56,14 +56,13 @@ struct Set {
         let middle: Int = dealedCards.count/2
         for _ in 0..<middle {
             let i = middle.arc4random
-            dealedCards.swapAt(i, dealedCards.count-i)
+            dealedCards.swapAt(i, dealedCards.count-i-1)
         }
     }
     
     mutating func dealOneMore() {
         if let card = deck.dealOneMore() {
             dealedCards.append(card)
-            print("\(card)")
         } else{
             deckIsEmpty = true
         }

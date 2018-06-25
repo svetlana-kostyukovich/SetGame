@@ -57,29 +57,32 @@ class ViewController: UIViewController {
     }
     
     func updateViewFromModel() {
-        print("dealed cards count = \(setGame.dealedCards.count)" )
         setGameView.drawnCards.removeAll()
         for dealedCard in setGame.dealedCards {
+            
             let playingCardView = PlayingCardView()
             playingCardView.color = dealedCard.colorForView
             playingCardView.number = dealedCard.number.rawValue
             playingCardView.shape = dealedCard.shape.rawValue
             playingCardView.shading = dealedCard.shading.rawValue
             
+            playingCardView.isSelected = dealedCard.isSelected
+            playingCardView.isMatched = dealedCard.isMatched
+            
             let tap = UITapGestureRecognizer(target: self, action: #selector(chooseCard))
             tap.numberOfTapsRequired = 1
             playingCardView.addGestureRecognizer(tap)
             
-            if dealedCard.isMatched {
-                playingCardView.layer.borderColor = UIColor.green.cgColor
-            } else if dealedCard.isSelected {
-                playingCardView.layer.borderColor = UIColor.green.cgColor
-            } else {
-                playingCardView.layer.borderColor = UIColor.green.cgColor
-            }
+ //           if dealedCard.isMatched {
+ //               playingCardView.layer.borderColor = UIColor.green.cgColor
+ //           } else if dealedCard.isSelected {
+ //               playingCardView.layer.borderColor = UIColor.green.cgColor
+ //           } else {
+ //               playingCardView.layer.borderColor = UIColor.green.cgColor
+ //           }
+ //           playingCardView.setLayer()
             
             setGameView.drawnCards.append(playingCardView)
-            print("append \(setGameView.drawnCards.count)")
         }
     }
     

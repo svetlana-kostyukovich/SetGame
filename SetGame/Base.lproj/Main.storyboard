@@ -18,14 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWb-Ao-QgM">
-                                <rect key="frame" x="35" y="41" width="63" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWb-Ao-QgM">
+                                <rect key="frame" x="35" y="41" width="55" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-20-YVc">
-                                <rect key="frame" x="35" y="609" width="114" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-20-YVc">
+                                <rect key="frame" x="35" y="609" width="84" height="33"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="New Game">
@@ -37,10 +37,10 @@
                             </button>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-oI-6rH" customClass="SetGameView" customModule="SetGame" customModuleProvider="target">
                                 <rect key="frame" x="3" y="72" width="369" height="529"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANv-Iv-KZD">
-                                <rect key="frame" x="224" y="609" width="114" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANv-Iv-KZD">
+                                <rect key="frame" x="245" y="609" width="93" height="33"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Deal 3 More">
@@ -54,15 +54,17 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kWb-Ao-QgM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="Dia-Dw-CVy"/>
-                            <constraint firstItem="ANv-Iv-KZD" firstAttribute="leading" secondItem="SRN-20-YVc" secondAttribute="trailing" constant="75" id="MLO-EW-E8m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ANv-Iv-KZD" secondAttribute="bottom" constant="25" id="OQZ-Mm-625"/>
                             <constraint firstItem="Rhw-oI-6rH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="PLc-IH-DBL"/>
+                            <constraint firstItem="SRN-20-YVc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="Qds-Qg-3od"/>
                             <constraint firstItem="Rhw-oI-6rH" firstAttribute="top" secondItem="kWb-Ao-QgM" secondAttribute="bottom" constant="8" id="SUs-xv-VF8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ANv-Iv-KZD" secondAttribute="trailing" constant="37" id="XLE-QT-THq"/>
                             <constraint firstItem="SRN-20-YVc" firstAttribute="top" secondItem="Rhw-oI-6rH" secondAttribute="bottom" constant="8" id="XUz-C9-h1Y"/>
                             <constraint firstItem="ANv-Iv-KZD" firstAttribute="top" secondItem="Rhw-oI-6rH" secondAttribute="bottom" constant="8" id="ZSk-L7-kxJ"/>
                             <constraint firstItem="Rhw-oI-6rH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="3" id="gVb-If-Fy8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rhw-oI-6rH" secondAttribute="trailing" constant="3" id="qkh-Uv-ZHl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SRN-20-YVc" secondAttribute="bottom" constant="25" id="siA-8d-t9x"/>
+                            <constraint firstItem="kWb-Ao-QgM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="wjP-Bu-2hO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -75,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="135.19999999999999" y="132.68365817091455"/>
         </scene>
     </scenes>
 </document>
