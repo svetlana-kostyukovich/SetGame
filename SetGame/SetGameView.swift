@@ -10,6 +10,8 @@ import UIKit
 
 class SetGameView: UIView {
 
+    var rowsGrid :Int {return grid?.dimensions.rowCount ?? 0}
+    private var grid: Grid?
     
     var drawnCards = [PlayingCardView](){
         willSet {
@@ -34,10 +36,11 @@ class SetGameView: UIView {
     }
     
     override func layoutSubviews() {
-        var grid = Grid(layout: .aspectRatio(0.62), frame: bounds)
-        grid.cellCount = drawnCards.count
-        for index in 0..<grid.cellCount {
-            if let frame = grid[index] {
+        super.layoutSubviews()
+        grid = Grid(layout: .aspectRatio(0.62), frame: bounds)
+        grid!.cellCount = drawnCards.count
+        for index in 0..<grid!.cellCount {
+            if let frame = grid![index] {
                 let gap = frame.width*0.05
                 drawnCards[index].frame = CGRect(origin: frame.origin, size: CGSize(width: frame.width - gap, height: frame.height - gap))
             }

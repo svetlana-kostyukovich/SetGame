@@ -10,6 +10,7 @@ import Foundation
 
 struct Set {
     private var deck = PlayingCardDeck()
+    var score = 0
     //deck = [PlayingCard]
     var dealedCards = [PlayingCard]()
     var potentialSetIndex = [Int]()
@@ -30,6 +31,7 @@ struct Set {
         potentialSetIndex.removeAll()
         dealedCards.removeAll()
         deckIsEmpty = false
+        score = 0
     }
     
     mutating func chooseCard(at index: Int) {
@@ -41,7 +43,9 @@ struct Set {
                 for indeces in potentialSetIndex {
                     dealedCards[indeces].isSelected = false
                     dealedCards[indeces].isMatched = true
+                    dealOneMore()
                 }
+                score += 1
             } else {
                 for indeces in potentialSetIndex {
                     dealedCards[indeces].isSelected = false
@@ -66,6 +70,11 @@ struct Set {
         } else{
             deckIsEmpty = true
         }
+    }
+    
+    mutating func removeMatched() {
+        let nonMatched = dealedCards.filter { !$0.isMatched}
+        dealedCards = nonMatched
     }
 
     

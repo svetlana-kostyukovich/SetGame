@@ -24,10 +24,11 @@ struct PlayingCard {
     
     enum Shape: String {
         case oval
-        case squiggle
-        case diamond
+        //case squiggle
+        //case diamond
         
-        static var all = [Shape.oval, .squiggle, .diamond]
+        //static var all = [Shape.oval, .squiggle, .diamond]
+        static var all = [Shape.oval]
     }
     
     enum Color: String  {

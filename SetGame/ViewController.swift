@@ -10,6 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //     MARK: Dynamic Animator
+    lazy var animator = UIDynamicAnimator(referenceView: view)
+    lazy var cardBehavior = CardBehavior(in: animator)
+    
+    //     MARK: Calculated Vars
+    
+    private var deckCenter: CGPoint {
+        return view.convert(dealMoreButton.center, to: setGameView)
+    }
+    
+    private var discardPileCenter: CGPoint {
+        return
+            dealMoreButton.convert(dealMoreButton.center, to: setGameView)
+        
+    }
+    
+    
     var setGame = Set()
     
     @IBOutlet weak var dealMoreButton: UIButton!
@@ -25,6 +42,14 @@ class ViewController: UIViewController {
         }
     }
     
+    var newCards: [PlayingCardView] {
+        var cards = [PlayingCardView]()
+        for i in setGameView.drawnCards.count - 3 ..< setGameView.drawnCards.count {
+            cards.append(setGameView.drawnCards[i])
+        }
+        return cards
+    }
+    
     @IBAction func newGame(_ sender: UIButton) {
         setGame.setToDefault()
         setGameView.drawnCards.removeAll()
@@ -38,6 +63,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func dealThreeMore(_ sender: UIButton) {
+        setGame.score -= 1
         for _ in 1...3 {  // drawnCards + 3
             setGame.dealOneMore()
             if setGame.deckIsEmpty {
@@ -58,6 +84,7 @@ class ViewController: UIViewController {
     
     func updateViewFromModel() {
         setGameView.drawnCards.removeAll()
+        setGame.removeMatched()
         for dealedCard in setGame.dealedCards {
             
             let playingCardView = PlayingCardView()
@@ -73,17 +100,23 @@ class ViewController: UIViewController {
             tap.numberOfTapsRequired = 1
             playingCardView.addGestureRecognizer(tap)
             
- //           if dealedCard.isMatched {
- //               playingCardView.layer.borderColor = UIColor.green.cgColor
- //           } else if dealedCard.isSelected {
- //               playingCardView.layer.borderColor = UIColor.green.cgColor
- //           } else {
- //               playingCardView.layer.borderColor = UIColor.green.cgColor
- //           }
- //           playingCardView.setLayer()
+            //           if dealedCard.isMatched {
+            //               playingCardView.layer.borderColor = UIColor.green.cgColor
+            //           } else if dealedCard.isSelected {
+            //               playingCardView.layer.borderColor = UIColor.green.cgColor
+            //           } else {
+            //               playingCardView.layer.borderColor = UIColor.green.cgColor
+            //           }
+            //           playingCardView.setLayer()
             
             setGameView.drawnCards.append(playingCardView)
+            dealAnimation()
         }
+        updateScore()
+    }
+    
+    private func updateScore() {
+        scoreLabel.text = String("Score: \(setGame.score)")
     }
     
     @objc func shuffleCards() {
@@ -101,6 +134,7 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        dealMoreButton.isEnabled = false
         //for _ in 1...12 {
         //    setGame.dealOneMore()
         //    updateViewFromModel()
@@ -113,6 +147,23 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //     MARK:  Animations
+    private func dealAnimation () {
+        
+        var currentDealCard = 0
+        
+        let timeInterval =  0.15  * Double(setGameView.rowsGrid + 1)
+        Timer.scheduledTimer(withTimeInterval: timeInterval,
+                             repeats: false) { (timer) in
+                                for  cardView in self.newCards{
+                                    cardView.animateDeal(from: self.deckCenter,
+                                                         delay: TimeInterval(currentDealCard) * 0.25)
+                                    currentDealCard += 1
+                                }
+        }
+    }
+    
     
     
 }
