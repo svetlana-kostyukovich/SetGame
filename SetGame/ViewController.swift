@@ -42,13 +42,18 @@ class ViewController: UIViewController {
         }
     }
     
-    var newCards: [PlayingCardView] {
-        var cards = [PlayingCardView]()
-        for i in setGameView.drawnCards.count - 3 ..< setGameView.drawnCards.count {
-            cards.append(setGameView.drawnCards[i])
-        }
-        return cards
+      var newCards: [PlayingCardView] {
+        return setGameView.drawnCards.filter{$0.isNew == true}
     }
+    //var newCards: [PlayingCardView] {
+    //    var cards = [PlayingCardView]()
+    //    for i in setGameView.drawnCards.count - 3 ..< setGameView.drawnCards.count {
+    //        setGameView.drawnCards[i].alpha = 0
+    //        cards.append(setGameView.drawnCards[i])
+    //        print("new: card\([i])")
+    //    }
+    //    return cards
+    //}
     
     @IBAction func newGame(_ sender: UIButton) {
         setGame.setToDefault()
@@ -66,6 +71,7 @@ class ViewController: UIViewController {
         setGame.score -= 1
         for _ in 1...3 {  // drawnCards + 3
             setGame.dealOneMore()
+            setGame.dealedCards[setGame.dealedCards.count-1].isNew = true
             if setGame.deckIsEmpty {
                 dealMoreButton.isEnabled = false
                 dealMoreButton.isHidden = true
@@ -74,7 +80,6 @@ class ViewController: UIViewController {
                 dealMoreButton.isEnabled = true
             }
             updateViewFromModel()
-            
             //setGameView.drawnCards.append(PlayingCardView())
             //setGameView.subviews.last
             //setGameView.shape =
@@ -95,22 +100,16 @@ class ViewController: UIViewController {
             
             playingCardView.isSelected = dealedCard.isSelected
             playingCardView.isMatched = dealedCard.isMatched
+            playingCardView.isNew = dealedCard.isNew
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(chooseCard))
             tap.numberOfTapsRequired = 1
             playingCardView.addGestureRecognizer(tap)
             
-            //           if dealedCard.isMatched {
-            //               playingCardView.layer.borderColor = UIColor.green.cgColor
-            //           } else if dealedCard.isSelected {
-            //               playingCardView.layer.borderColor = UIColor.green.cgColor
-            //           } else {
-            //               playingCardView.layer.borderColor = UIColor.green.cgColor
-            //           }
-            //           playingCardView.setLayer()
+            if playingCardView.isNew { dealAnimation()}
             
             setGameView.drawnCards.append(playingCardView)
-            dealAnimation()
+            
         }
         updateScore()
     }

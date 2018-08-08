@@ -15,6 +15,7 @@ struct PlayingCard {
     var shading: Shading
     var isSelected = false
     var isMatched = false
+    var isNew = false
     
     enum Number: Int {
         case one = 1, two, three

@@ -16,7 +16,7 @@ struct PlayingCardDeck {
             for color in PlayingCard.Color.all {
                 for shape in PlayingCard.Shape.all {
                     for shading in PlayingCard.Shading.all {
-                        deck.append(PlayingCard(number: number, color: color, shape: shape, shading: shading, isSelected: false, isMatched: false))
+                        deck.append(PlayingCard(number: number, color: color, shape: shape, shading: shading, isSelected: false, isMatched: false, isNew: false))
                     }
                 }
             }
