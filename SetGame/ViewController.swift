@@ -45,15 +45,6 @@ class ViewController: UIViewController {
     var newCards: [PlayingCardView] {
         return setGameView.drawnCards.filter{$0.isNew == true}
     }
-    //var newCards: [PlayingCardView] {
-    //    var cards = [PlayingCardView]()
-    //    for i in setGameView.drawnCards.count - 3 ..< setGameView.drawnCards.count {
-    //        setGameView.drawnCards[i].alpha = 0
-    //        cards.append(setGameView.drawnCards[i])
-    //        print("new: card\([i])")
-    //    }
-    //    return cards
-    //}
     
     @IBAction func newGame(_ sender: UIButton) {
         setGame.setToDefault()
@@ -79,12 +70,13 @@ class ViewController: UIViewController {
                 dealMoreButton.isHidden = false
                 dealMoreButton.isEnabled = true
             }
-            updateViewFromModel()
+            
             //setGameView.drawnCards.append(PlayingCardView())
             //setGameView.subviews.last
             //setGameView.shape =
             //setGameView.shape =
         }
+        updateViewFromModel()
     }
     
     func updateViewFromModel() {
@@ -108,11 +100,14 @@ class ViewController: UIViewController {
             tap.numberOfTapsRequired = 1
             playingCardView.addGestureRecognizer(tap)
             
-            if playingCardView.isNew { playingCardView.alpha = 0; dealAnimation()}
+            if playingCardView.isNew {
+                playingCardView.alpha = 0
+                setGame.dealedCards[index].isNew = false
+            }
             
             setGameView.drawnCards.append(playingCardView)
-            
         }
+        dealAnimation()
         updateScore()
     }
     
@@ -123,7 +118,6 @@ class ViewController: UIViewController {
     @objc func shuffleCards() {
         setGame.shuffleCards()
         updateViewFromModel()
-        //TODO: shuffle drawn cards
     }
     
     @objc func chooseCard(_ sender: UITapGestureRecognizer) {
@@ -154,15 +148,11 @@ class ViewController: UIViewController {
         
         var currentDealCard = 0
         
-        let timeInterval =  0.15  * Double(setGameView.rowsGrid + 1)
-        Timer.scheduledTimer(withTimeInterval: timeInterval,
-                             repeats: false) { (timer) in
-                                for  cardView in self.newCards{
-                                    cardView.animateDeal(from: self.deckCenter,
-                                                         delay: TimeInterval(currentDealCard) * 0.25)
-                                    currentDealCard += 1
-                                }
-        }
+            for cardView in self.newCards {
+                cardView.animateDeal(from: self.deckCenter,
+                                     delay: TimeInterval(currentDealCard) * 0.25)
+                currentDealCard += 1
+            }
     }
     
     
