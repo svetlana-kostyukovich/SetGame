@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         for _ in 1...12 {
             setGame.dealOneMore()
             updateViewFromModel()
+            setGameView.animateNewGame()
         }
         dealMoreButton.isHidden = false
         dealMoreButton.isEnabled = true
