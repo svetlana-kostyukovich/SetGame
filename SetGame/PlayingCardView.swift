@@ -27,9 +27,10 @@ class PlayingCardView: UIView {
         } else {
             //         drawBack()
             
-            if let cardBackImage = UIImage(named: "card-back",
-                                           in: Bundle(for: self.classForCoder),
-                                           compatibleWith: traitCollection) {
+            //if let cardBackImage = UIImage(named: "card-back.png",
+              //                             in: Bundle(for: self.classForCoder),
+              //                             compatibleWith: traitCollection) {
+            if let cardBackImage = UIImage(named: "Image") {
                 cardBackImage.draw(in: bounds)
             }
             

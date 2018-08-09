@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         }
     }
     
-      var newCards: [PlayingCardView] {
+    var newCards: [PlayingCardView] {
         return setGameView.drawnCards.filter{$0.isNew == true}
     }
     //var newCards: [PlayingCardView] {
@@ -90,8 +90,10 @@ class ViewController: UIViewController {
     func updateViewFromModel() {
         setGameView.drawnCards.removeAll()
         setGame.removeMatched()
-        for dealedCard in setGame.dealedCards {
+        //for dealedCard in setGame.dealedCards {
+        for index in setGame.dealedCards.indices {
             
+            let dealedCard = setGame.dealedCards[index]
             let playingCardView = PlayingCardView()
             playingCardView.color = dealedCard.colorForView
             playingCardView.number = dealedCard.number.rawValue
@@ -106,7 +108,7 @@ class ViewController: UIViewController {
             tap.numberOfTapsRequired = 1
             playingCardView.addGestureRecognizer(tap)
             
-            if playingCardView.isNew { dealAnimation()}
+            if playingCardView.isNew { playingCardView.alpha = 0; dealAnimation()}
             
             setGameView.drawnCards.append(playingCardView)
             
